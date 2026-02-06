@@ -28,6 +28,9 @@
   "dependencies": {
     "@excalidraw/random-username": "1.0.0",
     "@sentry/browser": "9.0.1",
+    "@tauri-apps/api": "^2.2.0",
+    "@tauri-apps/plugin-dialog": "^2.0.0",
+    "@tauri-apps/plugin-fs": "^2.0.0",
     "callsites": "4.2.0",
     "firebase": "11.3.1",
     "i18next-browser-languagedetector": "6.1.4",
@@ -49,7 +52,9 @@
     "start": "yarn && vite",
     "start:production": "yarn build && yarn serve",
     "serve": "npx http-server build -a localhost -p 5001 -o",
-    "build:preview": "yarn build && vite preview --port 5000"
+    "build:preview": "yarn build && vite preview --port 5000",
+    "tauri:dev": "cd ../src-tauri && cargo tauri dev",
+    "tauri:build": "cd ../src-tauri && cargo tauri build"
   },
   "devDependencies": {
     "vite-plugin-sitemap": "0.7.1"
