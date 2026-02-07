@@ -97,26 +97,20 @@ fn show_settings_window(app: AppHandle) -> Result<(), String> {
     }
 
     // 创建设置窗口
-    // 在开发模式下使用 devUrl，生产模式下使用 App URL
-    let url = if cfg!(debug_assertions) {
-        "http://localhost:3000/settings.html"
-    } else {
-        "settings.html"
-    };
-
+    // 在开发和生产模式下都使用 App 协议，通过 hash 路由区分
     let _settings_window = tauri::WebviewWindowBuilder::new(
         &app,
         "settings",
-        if cfg!(debug_assertions) {
-            tauri::WebviewUrl::External(url.parse().unwrap())
-        } else {
-            tauri::WebviewUrl::App(url.into())
-        },
+        tauri::WebviewUrl::App("index.html".into()),
     )
     .title("设置")
     .inner_size(600.0, 400.0)
     .resizable(false)
     .center()
+    .initialization_script(r#"
+        // 在窗口加载后导航到设置页面
+        window.location.hash = '/settings';
+    "#)
     .build()
     .map_err(|e| e.to_string())?;
 
@@ -159,6 +153,9 @@ pub fn run() {
                         .level(log::LevelFilter::Info)
                         .build(),
                 )?;
+
+                let window = app.get_webview_window("main").unwrap();
+                window.open_devtools();
             }
 
             // 创建系统托盘
@@ -208,6 +205,13 @@ pub fn run() {
                 .build(app)?;
 
             Ok(())
+        })
+        .on_window_event(|window, event| {
+            if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                let app_handle = window.app_handle();
+                let _ = window.hide();
+                api.prevent_close();
+            }
         })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

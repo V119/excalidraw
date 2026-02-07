@@ -1,0 +1,309 @@
+/* 全屏设置页面的样式 */
+body.settings-page {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+body.settings-page #root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.settings-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 0;
+  background: transparent;
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 标题区域 */
+.settings-container h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
+}
+
+/* 表单卡片 */
+.settings-container form {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.settings-container .form-group {
+  margin-bottom: 28px;
+}
+
+.settings-container label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+  letter-spacing: -0.2px;
+}
+
+.settings-container label::before {
+  content: "📁";
+  font-size: 18px;
+}
+
+.settings-container .input-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.settings-container input[type="text"] {
+  flex: 1;
+  padding: 14px 16px;
+  border: 2px solid #e8ecf1;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #f8f9fa;
+  color: #2c3e50;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.settings-container input[type="text"]:hover {
+  border-color: #d0d7de;
+  background: #fff;
+}
+
+.settings-container input[type="text"]:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.settings-container input[type="text"]:read-only {
+  cursor: default;
+}
+
+.settings-container button {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  letter-spacing: 0.3px;
+}
+
+.settings-container .btn-browse {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  min-width: 90px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.settings-container .btn-browse:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.settings-container .btn-browse:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.settings-container .btn-save {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+  width: 100%;
+  padding: 16px;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(56, 239, 125, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.settings-container .btn-save::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.settings-container .btn-save:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.settings-container .btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 239, 125, 0.4);
+}
+
+.settings-container .btn-save:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(56, 239, 125, 0.3);
+}
+
+.settings-container .btn-save:disabled {
+  background: linear-gradient(135deg, #b8c2cc 0%, #95a5a6 100%);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.settings-container .btn-save:disabled::before {
+  display: none;
+}
+
+.settings-container .info-text {
+  font-size: 13px;
+  color: #7f8c8d;
+  margin-top: 10px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #667eea;
+}
+
+.settings-container .status-message {
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.settings-container .status-message.success {
+  background: linear-gradient(135deg, #d4f4dd 0%, #c8f7dc 100%);
+  color: #0e6f3f;
+  border-left: 4px solid #11998e;
+}
+
+.settings-container .status-message.success::before {
+  content: "✓";
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.settings-container .status-message.error {
+  background: linear-gradient(135deg, #ffe5e5 0%, #ffd4d4 100%);
+  color: #c41e3a;
+  border-left: 4px solid #e74c3c;
+}
+
+.settings-container .status-message.error::before {
+  content: "✕";
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.settings-container .divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8ecf1, transparent);
+  margin: 28px 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 560px) {
+  .settings-container h1 {
+    font-size: 28px;
+  }
+
+  .settings-container form {
+    padding: 24px;
+  }
+
+  .settings-container .input-wrapper {
+    flex-direction: column;
+  }
+
+  .settings-container .btn-browse {
+    width: 100%;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  body.settings-page {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  }
+
+  .settings-container form {
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* 加载动画 */
+.settings-container .btn-save:disabled {
+  position: relative;
+}
+
+.settings-container .btn-save:disabled::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
